@@ -1,0 +1,50 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Job - CleanHome</title>
+    <link rel="stylesheet" href="{% static 'cleaning/style.css' %}">
+</head>
+<body>
+    <div class="provider-navbar">
+        <a href="{% url 'provider_dashboard' %}" class="logo">Partner App</a>
+        <nav>
+            <a href="{% url 'provider_dashboard' %}">Requests</a>
+            <a href="{% url 'provider_profile' %}">Profile</a>
+            <a href="{% url 'logout' %}" class="logout">Logout</a>
+        </nav>
+    </div>
+    
+    <div class="update-container">
+        <div class="update-card">
+            <h1>Update Service Status</h1>
+            <p>Booking ID: #{{ booking.id }}</p>
+            
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                
+                <label><strong>Current Status</strong></label>
+                <select name="status">
+                    <option value="confirmed" {% if booking.status == 'confirmed' %}selected{% endif %}>Confirmed</option>
+                    <option value="work_started" {% if booking.status == 'work_started' %}selected{% endif %}>Work Started</option>
+                    <option value="in_progress" {% if booking.status == 'in_progress' %}selected{% endif %}>In Progress</option>
+                    <option value="completed" {% if booking.status == 'completed' %}selected{% endif %}>Completed</option>
+                </select>
+                
+                <label><strong>Add Notes</strong></label>
+                <textarea name="notes" placeholder="e.g. Living room done, kitchen pending">{{ booking.notes }}</textarea>
+                
+                <label><strong>Upload Photo (Proof of work)</strong></label>
+                <input type="file" name="photo" accept="image/*">
+                
+                <div>
+                    <button type="submit" class="btn-save">Save Update</button>
+                    <a href="{% url 'provider_dashboard' %}" class="btn-cancel-action">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

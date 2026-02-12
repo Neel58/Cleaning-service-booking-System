@@ -1,0 +1,39 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Services - CleanHome</title>
+    <link rel="stylesheet" href="{% static 'cleaning/style.css' %}">
+</head>
+<body>
+    <div class="navbar">
+        <a href="{% url 'index' %}" class="logo">CleanHome</a>
+        <nav>
+            <a href="{% url 'index' %}">Home</a>
+            <a href="{% url 'services' %}" class="active">Services</a>
+            <a href="{% url 'user_profile' %}">My Profile</a>
+        </nav>
+    </div>
+    
+    <div class="services-container">
+        <h1>Select a Service</h1>
+        
+        <div class="services-grid">
+            {% for service in services %}
+            <div class="service-card">
+                <div class="service-header">
+                    <h2>{{ service.name }}</h2>
+                </div>
+                <div class="service-body">
+                    <h3>{{ service.name }}</h3>
+                    <p>{{ service.description }}</p>
+                    <a href="{% url 'service_detail' service.id %}" class="btn-view">View Details</a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>

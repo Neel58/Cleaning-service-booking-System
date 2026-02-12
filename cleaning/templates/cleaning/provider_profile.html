@@ -1,0 +1,39 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Provider Profile - CleanHome</title>
+    <link rel="stylesheet" href="{% static 'cleaning/style.css' %}">
+</head>
+<body>
+    <div class="provider-navbar">
+        <a href="{% url 'provider_dashboard' %}" class="logo">Partner App</a>
+        <nav>
+            <a href="{% url 'provider_dashboard' %}">Requests</a>
+            <a href="{% url 'provider_profile' %}">Profile</a>
+            <a href="{% url 'logout' %}" class="logout">Logout</a>
+        </nav>
+    </div>
+    
+    <div class="provider-profile">
+        <div class="provider-card">
+            <div class="provider-avatar">SP</div>
+            
+            <h2>Cleaner Name</h2>
+            <p>ID: #SP-2025 | Rating: <span class="rating">⭐ {{ profile.rating }}</span></p>
+            
+            <div class="provider-details">
+                <p><strong>📞 Phone:</strong> +{{ profile.phone }}</p>
+                <p><strong>📍 City:</strong> {{ profile.city }}</p>
+                <p><strong>💼 Experience:</strong> {{ profile.experience_years }} Years</p>
+                <p><strong>✅ Completed Jobs:</strong> {{ profile.completed_jobs }}</p>
+                <p><strong>💰 Total Earnings:</strong> ₹{{ profile.total_earnings }}</p>
+            </div>
+            
+            <button class="btn-edit">Edit Profile</button>
+        </div>
+    </div>
+</body>
+</html>

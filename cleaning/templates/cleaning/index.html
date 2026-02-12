@@ -1,0 +1,46 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - CleanHome</title>
+    <link rel="stylesheet" href="{% static 'cleaning/style.css' %}">
+</head>
+<body>
+    <div class="navbar">
+        <a href="{% url 'index' %}" class="logo">CleanHome</a>
+        <nav>
+            <a href="{% url 'services' %}">Services</a>
+            <a href="{% url 'user_profile' %}">My Profile</a>
+            <a href="{% url 'logout' %}" class="logout">Logout</a>
+        </nav>
+    </div>
+    
+    <div class="hero">
+        <h1>Expert Home Cleaning</h1>
+        <p>Reliable professionals at your doorstep.</p>
+        <a href="{% url 'services' %}" class="btn-book">Book a Service Now</a>
+    </div>
+    
+    <div class="features">
+        <div class="feature">
+            <div class="feature-icon">✓</div>
+            <h3>Quality Assured</h3>
+            <p>Professional cleaning services you can trust</p>
+        </div>
+        
+        <div class="feature">
+            <div class="feature-icon">$</div>
+            <h3>Affordable Prices</h3>
+            <p>Get the best value for your money</p>
+        </div>
+        
+        <div class="feature">
+            <div class="feature-icon">📍</div>
+            <h3>Location Based</h3>
+            <p>Find services in your area</p>
+        </div>
+    </div>
+</body>
+</html>

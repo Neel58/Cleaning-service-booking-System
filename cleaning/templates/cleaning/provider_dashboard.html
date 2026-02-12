@@ -1,0 +1,67 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Provider Dashboard - CleanHome</title>
+    <link rel="stylesheet" href="{% static 'cleaning/style.css' %}">
+</head>
+<body>
+    <div class="provider-navbar">
+        <a href="{% url 'provider_dashboard' %}" class="logo">Partner App</a>
+        <nav>
+            <a href="{% url 'provider_dashboard' %}">Requests</a>
+            <a href="{% url 'provider_profile' %}">Profile</a>
+            <a href="{% url 'logout' %}" class="logout">Logout</a>
+        </nav>
+    </div>
+    
+    <div class="dashboard-container">
+        <div class="requests-section">
+            <h2>New Job Requests</h2>
+            
+            {% if new_requests %}
+                {% for request in new_requests %}
+                <div class="request-card">
+                    <h3>Customer: {{ request.customer.first_name }} {{ request.customer.last_name }} <span class="new-badge">New</span></h3>
+                    <p><strong>Service:</strong> {{ request.service.name }}</p>
+                    <p><strong>Location:</strong> {{ request.location }}</p>
+                    
+                    <form method="POST" style="display: inline;">
+                        {% csrf_token %}
+                        <input type="hidden" name="booking_id" value="{{ request.id }}">
+                        <div class="request-actions">
+                            <button type="submit" name="action" value="accept" class="btn-accept">Accept</button>
+                            <button type="submit" name="action" value="reject" class="btn-reject">Reject</button>
+                        </div>
+                    </form>
+                </div>
+                {% endfor %}
+            {% else %}
+                <p>No new requests at the moment.</p>
+            {% endif %}
+        </div>
+        
+        <div class="jobs-section">
+            <h2>My Active Jobs</h2>
+            
+            {% if active_jobs %}
+                {% for job in active_jobs %}
+                <div class="job-card">
+                    <div class="job-icon">Sofa</div>
+                    <div class="job-info">
+                        <h3>Customer: {{ job.customer.first_name }} {{ job.customer.last_name }}</h3>
+                        <p>Service: {{ job.service.name }}</p>
+                        <p>Status: <strong>{{ job.status|title }}</strong></p>
+                    </div>
+                    <a href="{% url 'provider_update' job.id %}" class="btn-update">Update Status</a>
+                </div>
+                {% endfor %}
+            {% else %}
+                <p>No active jobs at the moment.</p>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>
